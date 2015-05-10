@@ -1,27 +1,40 @@
 <?php
 class Teacher {
+private $db;
+   function __construct($_db) {
+      $this->db = $_db;
+      }
   
   
    function add($_imie, $_nazwisko) {
     $q = "INSERT INTO Nauczyciel (Imie, Nazwisko) VALUES ('".$_imie."','".$_nazwisko."');";
-    echo $q;
+    if(!$this->db->query($q))
+    {
+      echo 'FAIL: nie udalo sie =)';
+      }
    }
    function save($_imie, $_nazwisko, $_id) {
       $q = "UPDATE Nauczyciel SET Imie='".$_imie."', Nazwisko ='".$_nazwisko."' where ID_Nauczyciela='".$_id."';";
-      echo $q;
+      if(!$this->db->query($q))
+    {
+      echo 'FAIL: nie udalo sie =)';
+      }
    }
    function get($_id) {
       $q = "SELECT * FROM Nauczyciel WHERE ID_Nauczyciela='".$_id."';";
-      echo $q;
+     return $this->db->query($q);
    }
    function getall() {
       
       $q = "SELECT * FROM Nauczyciel";
-      echo $q;
+   return $this->db->query($q);
    }
    function remove($_id) {
       $q = "DELETE FROM nauczyciel WHERE ID_Nauczyciela='".$_id."';";
-      echo $q;
+      if(!$this->db->query($q))
+    {
+      echo 'FAIL: nie udalo sie =)';
+      }
    }
 }
 

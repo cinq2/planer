@@ -1,27 +1,45 @@
 <?php
 class Group {
+
+private $db;
+   function __construct($_db) {
+      $this->db = $_db;
+      }
   
   
    function add($_kierunek, $_rok, $_semestr) {
     $q = "INSERT INTO grupa (Kierunek, Rok, Semestr) VALUES ('".$_kierunek."','".$_rok."','".$_semestr."');";
-    echo $q;
-   }
+    if(!$this->db->query($q))
+    {
+      echo 'FAIL: nie udalo sie =)';
+    }
    function save($_kierunek, $_rok, $_semestr, $_id) {
       $q = "UPDATE Grupa SET Kierunek='".$_kierunek."',Rok='".$_rok."',Semestr='".$_semestr."' WHERE Id_Grupa='".$_id."';";
-      echo $q;
-   }
+      if(!$this->db->query($q))
+    {
+      echo 'FAIL: nie udalo sie =)';
+    }
    function get($_id) {
       $q = "SELECT * FROM Grupa WHERE ID_Grupa='".$_id."';";  
-      echo $q;
+      return $this->db->query($q);
+    
+    
+    
    }
    function getall() {
       
       $q = "SELECT * FROM Grupa ;";
-      echo $q;
+      return $this->db->query($q);
+    
+    
+    
    }
    function remove($_id) {
       $q = "DELETE FROM Grupa WHERE ID_Grupa='".$_id."';";
-      echo $q;
+      return $this->db->query($q);
+    
+    
+    
    }
 }
 /*
