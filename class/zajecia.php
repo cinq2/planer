@@ -1,27 +1,46 @@
 <?php
 class zajecia {
+private $db;
+   function __construct($_db) {
+      $this->db = $_db;
+      }
   
   
    function add($_nauczyciel, $_grupa, $_przedmiot) {
     $q = "INSERT INTO zajecia (Nauczyciel, Grupa, Przedmiot) VALUES ('".$_nauczyciel."','".$_grupa."','".$_przedmiot."');";
-    echo $q;
+    if(!$this->db->query($q))
+    {
+      echo 'FAIL: nie udalo sie =)';
+   
    }
    function save($_nauczyciel, $_grupa, $_przedmiot, $_id) {
       $q = "UPDATE Zajecia SET Nauczyciel='".$_nauczyciel."',Grupa='".$_grupa."',przedmiot='".$_przedmiot."' WHERE Id_Zajec='".$_id."';";
-      echo $q;
+      if(!$this->db->query($q))
+    {
+      echo 'FAIL: nie udalo sie =)';
+   
    }
    function get($_id) {
       $q = "SELECT * FROM zajecia WHERE ID_Zajec='".$_id."';";  
-      echo $q;
+      return $this->db->query($q);
+    
+    
+    
    }
    function getall() {
       
       $q = "SELECT * FROM zajecia ;";
-      echo $q;
+      return $this->db->query($q);
+    
+    
+    
    }
    function remove($_id) {
       $q = "DELETE FROM zajecia WHERE ID_Zajec='".$_id."';";
-      echo $q;
+      return $this->db->query($q);
+    
+    
+    
    }
 }
 /*
