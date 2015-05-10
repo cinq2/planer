@@ -28,6 +28,25 @@ private $db;
       
       $q = "SELECT * FROM Przedmiot";
       return $this->db->query($q);
+   }
+   function getHTMLtable() {
+		$q = "SELECT * FROM Przedmiot";
+		$result = $this->db->query($q);
+		if ($result->num_rows > 0) {
+		// output data of each row
+		echo "<table>";
+		while($row = $result->fetch_assoc()) {
+		echo "<tr>";
+        echo '<td>'.$row["Id_Przedmiotu"].'</td><td>'.$row["Przedmiot"].'</td>;
+        echo '<td><a href="przedmiot.php?tryb=edytuj&id='.$row["Id_Przedmiotu"].'">Edytuj</a></td>';
+        echo '<td><a href="przedmiot.php?tryb=usun&id='.$row["Id_Przedmiotu"].'">Usuń</a></td>';
+        echo "</tr>";
+		}
+		echo "</table>";
+		}	 else {
+			echo "0 results";
+		}
+   }
     
     
     
